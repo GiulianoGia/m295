@@ -19,6 +19,7 @@ const createTask = (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.status(201).send({ message: 'New task created.', data: task });
     } else {
+        res.setHeader('Content-Type', 'application/json');
         res.status(406).send({ error: "Task isn't valid!" });
     }
 };
@@ -31,9 +32,11 @@ const getTaskById = (req, res) => {
             res.setHeader('Content-Type', 'application/json');
             res.status(200).send({ message: 'Task found.', data: task });
         } else {
+            res.setHeader('Content-Type', 'application/json');
             res.status(404).send({ error: 'Task not found!' });
         }
     } else {
+        res.setHeader('Content-Type', 'application/json');
         res.status(400).send({ error: "id isn't given!" });
     }
 };
@@ -57,9 +60,11 @@ const replaceTask = (req, res) => {
                 data: replaceTask,
             });
         } else {
+            res.setHeader('Content-Type', 'application/json');
             res.status(400).send({ error: "Task isn't valid!" });
         }
     } else {
+        res.setHeader('Content-Type', 'application/json');
         res.status(404).send({ error: 'Task not found!' });
     }
 };
@@ -73,9 +78,11 @@ const deleteTask = (req, res) => {
             res.setHeader('Content-Type', 'application/json');
             res.status(200).send({ message: 'Task deleted.', data: task });
         } else {
+            res.setHeader('Content-Type', 'application/json');
             res.status(404).send({ error: 'Task not found!' });
         }
     } else {
+        res.setHeader('Content-Type', 'application/json');
         res.status(400).send({ error: "id isn't given!" });
     }
 };

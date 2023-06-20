@@ -23,6 +23,10 @@ npm run lint
 This is the project for the 'Leistungsbeurteilung B' in the Module 259. The Project stores and gets tasks. Before the data can be retreived, the endpoint /login has to be called. The credentials are: <strong>password=m295</strong> and any valid email
 The tests have been written in postman and not with jest or mocha.
 
+## Colaborators
+A big thanks to my colaborators:
+- @GiulianoGia 💪
+
 ## Endpoints
 
 ### GET/tasks
