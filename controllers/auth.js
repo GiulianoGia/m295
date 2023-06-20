@@ -30,7 +30,14 @@ const verifySession = (req, res) => {
     }
 };
 
+const deleteSession = (req, res) => {
+    req.session.destroy();
+    res.setHeader('Content-Type', 'application/json');
+    res.sendStatus(204);
+};
+
 module.exports = {
     loginUser,
-    verifySession
+    verifySession,
+    deleteSession,
 };

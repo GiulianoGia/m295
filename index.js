@@ -6,7 +6,11 @@ const {
     replaceTask,
     deleteTask,
 } = require('./controllers/tasks');
-const { loginUser, verifySession } = require('./controllers/auth');
+const {
+    loginUser,
+    verifySession,
+    deleteSession,
+} = require('./controllers/auth');
 const app = express();
 const port = 3000;
 var session = require('express-session');
@@ -24,9 +28,8 @@ app.use(
         cookie: { secure: false, expires: 6000000 },
     }),
 );
-
 app.use(express.json());
-
+app.use(cors());
 app.use((req, res, next) => {
     if (req.session.authenticated || req.path === '/login') {
         next();
@@ -50,6 +53,7 @@ app.delete('/tasks/:id', deleteTask);
 // authentication
 app.post('/login', loginUser);
 app.get('/verify', verifySession);
+app.delete('/logout', deleteSession);
 
 app.listen(port, () => {
     console.log(`Todo app listening at http://localhost:${port}`);

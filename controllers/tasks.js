@@ -10,7 +10,7 @@ const createTask = (req, res) => {
     const newTask = req.body;
     if (newTask && newTask.title) {
         const task = {
-            id: getTaskId(),
+            id: getTaskId(tasks),
             title: newTask.title,
             created_at: new Date(),
             finished_at: null,
@@ -19,7 +19,7 @@ const createTask = (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.status(201).send({ message: 'New task created.', data: task });
     } else {
-        res.status(400).send({ error: "Task isn't valid!" });
+        res.status(406).send({ error: "Task isn't valid!" });
     }
 };
 

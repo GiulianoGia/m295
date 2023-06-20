@@ -1,8 +1,8 @@
-function getTaskId() {
-    const highestId = 0;
-    for (task in tasks) {
-        if (task.id > highestId) {
-            highestId = task.id;
+function getTaskId(tasks) {
+    let highestId = 0;
+    for (let id in tasks) {
+        if (highestId < tasks[id].id) {
+            highestId = tasks[id].id;
         }
     }
     return highestId + 1;
