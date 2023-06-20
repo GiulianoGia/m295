@@ -1,0 +1,168 @@
+openapi: 3.0.0
+info:
+  title: Task API
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+tags:
+  - name: tasks
+    description: Everything about Tasks
+  - name: auth
+    description: Everything about Auth
+paths:
+  /tasks:
+    get:
+      tags:
+        - tasks
+      summary: Get all tasks
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+    post:
+      tags:
+        - tasks
+      summary: Create a new task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        '201':
+          description: New task created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '406':
+          description: Task isn't valid!
+  /tasks/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: Task ID
+        required: true
+        schema:
+          type: integer
+    get:
+      tags:
+        - tasks
+      summary: Get task by id
+      responses:
+        '200':
+          description: Task found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '404':
+          description: Task not found!
+        '400':
+          description: id isn't given!
+    put:
+      tags: 
+        - tasks
+      summary: Update task by id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        '200':
+          description: Task replaced.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '404':
+          description: Task not found!
+        '400': 
+          description: Task isn't valid!
+    delete:
+      tags:
+        - tasks
+      summary: Delete task by id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '404':
+          description: Task not found
+        '400': 
+          description: id isn't given!
+  /login:
+    post: 
+      tags:
+        - auth
+      summary: Login User and get Session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+              
+      responses:
+        '200':
+          description: Login was successful.
+        '401':
+          description: Invalid password!
+        '400':
+          description: Email or Password isn't valid!
+  /verify:
+    get:
+      tags:
+        - auth
+      summary: checks if the session is available
+      responses: 
+        '200':
+          description: Session is valid.
+        '401':
+          description: Session isn't valid!
+  /delete:
+    delete:
+      tags:
+        - auth
+      summary: deletes a session
+      responses:
+        '204':
+          description: No Content
+    
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: "Wash the car"
+        created_at:
+          type: string
+          example: "2023-06-20T12:44:27.090Z"
+        finished_at: 
+          type: string
+          example: "2023-06-20T12:44:27.090Z"
+    Login:
+      type: object
+      properties:
+        email: 
+          type: string
+          example: "test@test.com"
+        password:
+          type: string
+          example: "m295"

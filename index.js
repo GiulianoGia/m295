@@ -15,6 +15,7 @@ const app = express();
 const port = 3000;
 var session = require('express-session');
 const genuuid = require('uuid').v4;
+const cors = require('cors');
 
 app.use(
     session({
